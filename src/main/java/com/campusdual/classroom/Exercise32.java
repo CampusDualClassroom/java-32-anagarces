@@ -29,15 +29,12 @@ public class Exercise32 {
     }
 
     public static void printToFile(String string) {
-
         File file = new File("src/main/resources/data.txt");
-        PrintWriter pw = null;
-        try {
-            pw = new PrintWriter(new FileWriter(file));
-            pw.println(string);
-            pw.close();
 
-        } catch (Exception ex) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(file))) {
+            pw.println(string);
+        }
+        catch (IOException ex) {
             ex.printStackTrace();
         }
 
